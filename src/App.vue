@@ -42,20 +42,16 @@ const cadastraTarefa = () => {
   estado.tarefas.push(tarefaNova);
   estado.tarefaTemp = '';
 }
+
+const qualFiltro = evento => estado.filtro = evento.target.value;
 </script>
 
 <template>
 <div class="container">
-  <Cabecalho  />
-  <Formulario />
-  <ListaDeTarefas />
+  <Cabecalho :tarefas-pendentes="getTarefasPendentes().length" />
+  <Formulario :trocar-filtro="qualFiltro" :tarefa-temp="estado.tarefaTemp" :edita-tarefa-temp="evento => estado.tarefaTemp = evento.target.value" :cadastra-tarefa="cadastraTarefa" />
+  <ListaDeTarefas  :tarefas="estado.tarefas" :cadastra-tarefa="cadastraTarefa" :tarefasFiltradas="getTarefasFiltradas()" />
 </div>
 </template>
 
-<style scoped>
 
-.done {
-  text-decoration: line-through;
-}
-
-</style>
